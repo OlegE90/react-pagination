@@ -1,4 +1,29 @@
-.main-style {
-    background-color: white;
+.pagination {
     display: flex;
+    justify-content: center;
+    padding-left: 0;
+    list-style: none;
+
+    li {
+        display: list-item;
+    }
+
+    .page-item.active .page-link {
+        z-index: 2;
+        color: white;
+        background-color: blue;
+        border-color: blue;
+    }
+
+    .page-link {
+        position: relative;
+        display: block;
+        padding: 8px 12px;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: blue;
+        background-color: white;
+        border: 1px solid green;
+    }
+
 }

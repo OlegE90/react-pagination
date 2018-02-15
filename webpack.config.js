@@ -7,7 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = (env) => ({
     target: 'web',
     context: path.resolve('src'),
-    entry: './main.tsx',
+    entry: './test.tsx',
     output: {
         path: path.resolve('dist'),
         filename: 'bundle.js'
@@ -15,7 +15,6 @@ module.exports = (env) => ({
     devtool: env.prod ? 'source-map' : 'eval',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
-        // Allow absolute paths in imports, e.g. import Button from 'components/Button'
         modules: ['node_modules', 'src'],
     },
     module: {
@@ -97,15 +96,8 @@ module.exports = (env) => ({
             PRODUCTION: JSON.stringify(true),
             VERSION: JSON.stringify("5fa3b9")
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: "vendor.js",
-            minChunks: module => /node_modules/.test(module.resource),
-        }),
         ...(env.prod ? [] : [
-            // https://github.com/webpack/webpack/blob/master/examples/scope-hoisting/README.md
             new webpack.optimize.ModuleConcatenationPlugin(),
-            // https://github.com/mishoo/UglifyJS2#compressor-options
             new webpack.optimize.UglifyJsPlugin({
                 compress: {
                     unused: true,

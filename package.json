@@ -1,7 +1,7 @@
 {
-  "name": "test-work-space",
-  "version": "1.0.0",
-  "description": "",
+  "name": "react-pagination",
+  "version": "0.0.1",
+  "description": "Simple pagination for react",
   "main": "index.js",
   "browserslist": [
     ">1%",

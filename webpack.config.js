@@ -7,10 +7,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = (env) => ({
     target: 'web',
     context: path.resolve('src'),
-    entry: './test.tsx',
+    entry: env.prod ? './pagination.tsx' : './test.tsx',
     output: {
         path: path.resolve('dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
     } ,
     devtool: env.prod ? 'source-map' : 'eval',
     resolve: {
@@ -31,6 +31,7 @@ module.exports = (env) => ({
                         options: {
                             babelrc: false,
                             presets: [
+                                'es2015',
                                 'react'
                             ]
                         }
@@ -86,33 +87,26 @@ module.exports = (env) => ({
             }]
     },
     plugins: [
-        new ExtractTextPlugin('[name].[contenthash].css'),
-        new HtmlWebpackPlugin({
-            template: path.resolve('src/assets/index.html'),
-            filename: 'index.html',
-            inject: 'body'
-        }),
-        new webpack.DefinePlugin({
-            PRODUCTION: JSON.stringify(true),
-            VERSION: JSON.stringify("5fa3b9")
-        }),
-        ...(env.prod ? [] : [
-            new webpack.optimize.ModuleConcatenationPlugin(),
+        ...(env.prod ? [
             new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    unused: true,
-                    dead_code: true,
-                    screw_ie8: true,
-                },
-                mangle: {
-                    screw_ie8: true,
+                compressor: {
+                    pure_getters: true,
+                    unsafe: true,
+                    unsafe_comps: true,
+                    warnings: false,
                 },
                 output: {
                     comments: false,
-                    screw_ie8: true,
                 },
-                sourceMap: true,
-            }),
+                sourceMap: false,
+            })
+        ] : [
+            new ExtractTextPlugin('[name].css'),
+            new HtmlWebpackPlugin({
+                template: path.resolve('src/assets/index.html'),
+                filename: 'index.html',
+                inject: 'body'
+            })
         ])
     ]
 });

@@ -1,14 +1,16 @@
+import 'assets/styles/main.less';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import {Pagination} from './pagination'
+import Pagination from './pagination'
 
 export class PaginationTest extends React.Component<{}, {}> {
 
     state = {
         activePage: 1,
-        itemsCountPerPage: 5,
-        totalItemsCount: 20,
+        pageRangeDisplayed: 5,
+        totalPageRange: 20,
     }
 
     handleOnChange = (number: number) => {
@@ -18,13 +20,13 @@ export class PaginationTest extends React.Component<{}, {}> {
     }
 
     render () {
-        const {activePage, itemsCountPerPage, totalItemsCount} = this.state;
+        const {activePage, pageRangeDisplayed, totalPageRange} = this.state;
 
         return (
             <Pagination
                 activePage={activePage}
-                itemsCountPerPage={itemsCountPerPage}
-                totalItemsCount={totalItemsCount}
+                totalPageRange={totalPageRange}
+                pageRangeDisplayed={pageRangeDisplayed}
                 onChange={this.handleOnChange}
             />
         );

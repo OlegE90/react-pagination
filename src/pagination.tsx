@@ -13,16 +13,16 @@ enum EDirection {
  * @prop {number} totalPageRange Total pages.
  * @prop {number} pageRangeDisplayed Count of displaying pages.
  * @prop {Function} onChange The handler of changing position.
- * @prop {Function} renderRowOneStep Render row for one step (Right && Left).
- * @prop {Function} renderRowLast Render row to last page (Right && Left).
+ * @prop {Function} [renderRowOneStep] Render row for one step (Right && Left).
+ * @prop {Function} [renderRowLast] Render row to last page (Right && Left).
  */
 interface IProps {
     activePage: number;
     totalPageRange: number;
     pageRangeDisplayed: number;
     onChange: (page: number) => void;
-    renderRowOneStep: (row: EDirection) => JSX.Element;
-    renderRowLast: (row: EDirection) => JSX.Element;
+    renderRowOneStep?: (row: EDirection) => JSX.Element;
+    renderRowLast?: (row: EDirection) => JSX.Element;
 }
 
 export default class extends React.Component<IProps, {}> {
@@ -84,7 +84,7 @@ export default class extends React.Component<IProps, {}> {
         return <React.Fragment>
             {numbers.map((value) => {
                 return (
-                    <li onClick={this.handlerChangePage(value)}
+                    <li key={value} onClick={this.handlerChangePage(value)}
                         className={`page-item ${value === activePage ? 'active' : ''}`}>
                         <a className="page-link">{value}</a>
                     </li>
@@ -101,8 +101,12 @@ export default class extends React.Component<IProps, {}> {
             <li
                 className="row-step-back"
             >
-                <a onClick={this.handlerChangePage(backStep)}>
-                    {renderRowOneStep && renderRowOneStep(EDirection.LEFT) || '<'}
+                <a
+                    onClick={this.handlerChangePage(backStep)}
+                    className="page-link"
+
+                >
+                    {renderRowOneStep && renderRowOneStep(EDirection.LEFT) || <span>{'<'}</span>}
                 </a>
             </li>
         ) : null;
@@ -117,8 +121,11 @@ export default class extends React.Component<IProps, {}> {
                 onClick={this.handlerChangePage(nextStep)}
                 className="row-step-next"
             >
-                <a onClick={this.handlerChangePage(nextStep)}>
-                    {renderRowOneStep && renderRowOneStep(EDirection.RIGHT) || '>'}
+                <a
+                    onClick={this.handlerChangePage(nextStep)}
+                    className="page-link"
+                >
+                    {renderRowOneStep && renderRowOneStep(EDirection.RIGHT) || <span>{'>'}</span>}
                 </a>
             </li>
         ) : null;
@@ -132,8 +139,11 @@ export default class extends React.Component<IProps, {}> {
             <li
                 className="row-first"
             >
-                <a onClick={this.handlerChangePage(1)}>
-                    {renderRowLast && renderRowLast(EDirection.LEFT) || '<<'}
+                <a
+                    onClick={this.handlerChangePage(1)}
+                    className="page-link"
+                >
+                    {renderRowLast && renderRowLast(EDirection.LEFT) || <span>{'<<'}</span>}
                 </a>
             </li>
         ) : null;
@@ -148,8 +158,11 @@ export default class extends React.Component<IProps, {}> {
                 onClick={this.handlerChangePage(totalPageRange)}
                 className="row-last"
             >
-                <a onClick={this.handlerChangePage(totalPageRange)}>
-                    {renderRowLast && renderRowLast(EDirection.RIGHT) || '>>'}
+                <a
+                    onClick={this.handlerChangePage(totalPageRange)}
+                    className="page-link"
+                >
+                    {renderRowLast && renderRowLast(EDirection.RIGHT) || <span>{'>>'}</span>}
                 </a>
             </li>
         ) : null;

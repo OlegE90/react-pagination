@@ -1,1 +1,1 @@
-Webpack 2 Deep Dive - b. webpack;
+React pagination.

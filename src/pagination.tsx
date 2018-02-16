@@ -1,31 +1,41 @@
-import 'assets/styles/main.less';
-
 import * as React from 'react';
 
 /**
+ * Direction.
+ */
+enum EDirection {
+    RIGHT = 'RIGHT',
+    LEFT = 'LEFT',
+}
+
+/**
  * @prop {number} activePage Current page.
- * @prop {number} itemsCountPerPage Elements on page.
- * @prop {number} totalItemsCount Total pages.
+ * @prop {number} totalPageRange Total pages.
+ * @prop {number} pageRangeDisplayed Count of displaying pages.
  * @prop {Function} onChange The handler of changing position.
+ * @prop {Function} renderRowOneStep Render row for one step (Right && Left).
+ * @prop {Function} renderRowLast Render row to last page (Right && Left).
  */
 interface IProps {
     activePage: number;
-    itemsCountPerPage: number;
-    totalItemsCount: number;
+    totalPageRange: number;
+    pageRangeDisplayed: number;
     onChange: (page: number) => void;
+    renderRowOneStep: (row: EDirection) => JSX.Element;
+    renderRowLast: (row: EDirection) => JSX.Element;
 }
 
-export class Pagination extends React.Component<IProps, {}> {
+export default class extends React.Component<IProps, {}> {
 
-    isAvailableNumber = (number: number): boolean => number > 0 && number <= this.props.totalItemsCount;
+    isAvailableNumber = (number: number): boolean => number > 0 && number <= this.props.totalPageRange;
 
     handlerChangePage = (number: number) => (e: any) => {
         this.props.onChange(number);
     };
 
     renderNumbers (): JSX.Element {
-        const {activePage, itemsCountPerPage, totalItemsCount} = this.props;
-        const part = Math.min(totalItemsCount, itemsCountPerPage);
+        const {activePage, pageRangeDisplayed, totalPageRange} = this.props;
+        const part = Math.min(totalPageRange, pageRangeDisplayed);
 
         if (part < 2) {
             return;
@@ -65,7 +75,6 @@ export class Pagination extends React.Component<IProps, {}> {
             }
         }
 
-
         const numbers: number[] = [
             ...leftNumbers.reverse(),
             activePage,
@@ -82,65 +91,71 @@ export class Pagination extends React.Component<IProps, {}> {
                 )
             })}
         </React.Fragment>
-
     }
 
-    renderRowBackOneStep = () => {
-        const backStep = this.props.activePage - 1;
+    renderRowBackOneStep = (): JSX.Element => {
+        const {activePage, renderRowOneStep} = this.props;
+        const backStep = activePage - 1;
 
         return this.isAvailableNumber(backStep) ? (
             <li
-                onClick={this.handlerChangePage(backStep)}
                 className="row-step-back"
             >
-                {'<'}
+                <a onClick={this.handlerChangePage(backStep)}>
+                    {renderRowOneStep && renderRowOneStep(EDirection.LEFT) || '<'}
+                </a>
             </li>
         ) : null;
     };
 
-    renderRowNextOneStep = () => {
-        const nextStep = this.props.activePage + 1;
+    renderRowNextOneStep = (): JSX.Element => {
+        const {activePage, renderRowOneStep} = this.props;
+        const nextStep = activePage + 1;
 
         return this.isAvailableNumber(nextStep) ? (
             <li
                 onClick={this.handlerChangePage(nextStep)}
                 className="row-step-next"
             >
-                {'>'}
+                <a onClick={this.handlerChangePage(nextStep)}>
+                    {renderRowOneStep && renderRowOneStep(EDirection.RIGHT) || '>'}
+                </a>
             </li>
         ) : null;
     };
 
-    renderRowToFirst = () => {
-        const isVisible = this.isAvailableNumber(this.props.activePage - 1);
+    renderRowToFirst = (): JSX.Element => {
+        const {activePage, renderRowLast} = this.props;
+        const isVisible = this.isAvailableNumber(activePage - 1);
 
         return isVisible ? (
             <li
-                onClick={this.handlerChangePage(1)}
-                className="row-step-next"
+                className="row-first"
             >
-                {'<<'}
+                <a onClick={this.handlerChangePage(1)}>
+                    {renderRowLast && renderRowLast(EDirection.LEFT) || '<<'}
+                </a>
             </li>
         ) : null;
     };
 
-    renderRowToLast = () => {
-        const {activePage, totalItemsCount} = this.props;
+    renderRowToLast = (): JSX.Element => {
+        const {activePage, totalPageRange, renderRowLast} = this.props;
         const isVisible = this.isAvailableNumber(activePage + 1);
 
         return isVisible ? (
             <li
-                onClick={this.handlerChangePage(totalItemsCount)}
-                className="row-step-next"
+                onClick={this.handlerChangePage(totalPageRange)}
+                className="row-last"
             >
-                {'>>'}
+                <a onClick={this.handlerChangePage(totalPageRange)}>
+                    {renderRowLast && renderRowLast(EDirection.RIGHT) || '>>'}
+                </a>
             </li>
         ) : null;
     };
 
     render () {
-        const {activePage} = this.props;
-
         return (
             <ul className="pagination">
                 {this.renderRowToFirst()}

@@ -1,8 +1,9 @@
 {
   "name": "react-pagination-main",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "description": "Simple pagination for react",
-  "main": "./dist/bundle.js",
+  "main": "./dist/Pagination.js",
+  "types": "./dist/pagination.d.ts",
   "browserslist": [
     ">1%",
     "last 4 versions",

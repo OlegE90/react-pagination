@@ -1,9 +1,11 @@
+import 'assets/styles/main.less';
+
 import * as React from 'react';
 
 /**
  * Direction.
  */
-enum EDirection {
+export enum EDirection {
     RIGHT = 'RIGHT',
     LEFT = 'LEFT',
 }
@@ -16,7 +18,7 @@ enum EDirection {
  * @prop {Function} [renderRowOneStep] Render row for one step (Right && Left).
  * @prop {Function} [renderRowLast] Render row to last page (Right && Left).
  */
-interface IProps {
+export interface IProps {
     activePage: number;
     totalPageRange: number;
     pageRangeDisplayed: number;

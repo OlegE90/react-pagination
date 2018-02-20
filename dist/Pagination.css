@@ -1,0 +1,30 @@
+.pagination {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  padding-left: 0;
+  list-style: none;
+}
+.pagination li {
+  display: list-item;
+}
+.pagination .page-item.active .page-link {
+  z-index: 2;
+  color: white;
+  background-color: blue;
+  border-color: blue;
+}
+.pagination .page-link {
+  position: relative;
+  cursor: pointer;
+  display: block;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: blue;
+  background-color: white;
+  border: 1px solid green;
+  padding: 8px 12px;
+}
+
+/*# sourceMappingURL=Pagination.css.map*/

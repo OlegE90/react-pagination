@@ -10,6 +10,7 @@ module.exports = (env) => ({
     entry: env.prod ? './pagination.tsx' : './test.tsx',
     output: {
         path: path.resolve('dist'),
+        libraryTarget: 'umd',
         filename: env.prod ? 'Pagination.js' : 'bundle.js',
     } ,
     devtool: env.prod ? 'source-map' : 'eval',
@@ -72,8 +73,8 @@ module.exports = (env) => ({
             }]
     },
     plugins: [
+        new webpack.optimize.UglifyJsPlugin({ minimize: true }),
         ...(env.prod ? [
-            new webpack.optimize.UglifyJsPlugin(),
             new ExtractTextPlugin("Pagination.css")
         ] : [
             new ExtractTextPlugin('[name].css'),

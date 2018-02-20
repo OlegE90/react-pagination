@@ -1,5 +1,5 @@
 {
-  "name": "react-pagination",
+  "name": "react-pagination-main",
   "version": "0.0.1",
   "description": "Simple pagination for react",
   "main": "./dist/bundle.js",

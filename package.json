@@ -1,13 +1,26 @@
 {
-  "name": "react-pagination",
-  "version": "0.0.1",
+  "name": "react-pagination-main",
+  "version": "0.0.12",
   "description": "Simple pagination for react",
-  "main": "./dist/bundle.js",
+  "main": "./dist/Pagination.js",
+  "types": "./dist/pagination.d.ts",
   "browserslist": [
     ">1%",
     "last 4 versions",
     "Firefox ESR",
     "not ie < 9"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OlegE90/react-pagination"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "pagination",
+    "paginator",
+    "bootstrap",
+    "reload"
   ],
   "dependencies": {
     "react": "16.2.0",

@@ -1,17 +1,12 @@
 {
     "compilerOptions": {
-        "jsx": "preserve",
         "module": "es2015",
-        "moduleResolution": "node",
-        "noImplicitAny": true,
-        "outDir": "./dist/",
-        "preserveConstEnums": true,
-        "removeComments": true,
-        "target": "esnext",
-        "experimentalDecorators": true
+        "declaration": true,
+        "outDir": "dist",
+        "target": "es5",
+        "jsx": "react"
     },
-    "exclude": [
-        "node_modules",
-        "tools"
+    "files": [
+        "./src/Pagination.tsx"
     ]
 }

@@ -10,11 +10,12 @@ module.exports = (env) => ({
     entry: env.prod ? './pagination.tsx' : './test.tsx',
     output: {
         path: path.resolve('dist'),
-        filename: 'bundle.js',
+        libraryTarget: 'umd',
+        filename: env.prod ? 'Pagination.js' : 'bundle.js',
     } ,
     devtool: env.prod ? 'source-map' : 'eval',
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        extensions: ['.js', '.ts', '.tsx'],
         modules: ['node_modules', 'src'],
     },
     module: {
@@ -45,11 +46,10 @@ module.exports = (env) => ({
             },
             // Rules for Style Sheets
             {
-                test: /\.(css|less|styl|scss|sass|sss)$/,
+                test: /\.(css|less)$/,
                 rules: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
-                        // Apply PostCSS plugins including autoprefixer
                         {
                             loader: 'postcss-loader',
                             options: {
@@ -61,45 +61,21 @@ module.exports = (env) => ({
                         {
                             test: /\.css$/,
                             include: path.resolve('src'),
-                            loader: 'css-loader',
-                            options: {
-                                // CSS Loader https://github.com/webpack/css-loader
-                                importLoaders: 1,
-                                sourceMap: env.dev,
-                                // CSS Modules https://github.com/css-modules/css-modules
-                                modules: true,
-                                localIdentName: env.dev
-                                    ? '[name]-[local]-[hash:base64:5]'
-                                    : '[hash:base64:5]',
-                                // CSS Nano http://cssnano.co/
-                                minimize: env.dev ? false : {
-                                    discardComments: {removeAll: true},
-                                }
-                            },
+                            loader: 'css-loader'
                         },
                         {
                             test: /\.less$/,
                             loader: 'less-loader',
                         }
                     ]
-                    
+
                 })
             }]
     },
     plugins: [
+        new webpack.optimize.UglifyJsPlugin({ minimize: true }),
         ...(env.prod ? [
-            new webpack.optimize.UglifyJsPlugin({
-                compressor: {
-                    pure_getters: true,
-                    unsafe: true,
-                    unsafe_comps: true,
-                    warnings: false,
-                },
-                output: {
-                    comments: false,
-                },
-                sourceMap: false,
-            })
+            new ExtractTextPlugin("Pagination.css")
         ] : [
             new ExtractTextPlugin('[name].css'),
             new HtmlWebpackPlugin({

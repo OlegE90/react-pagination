@@ -1,5 +1,3 @@
-import 'assets/styles/main.less';
-
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 

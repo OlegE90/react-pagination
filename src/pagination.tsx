@@ -10,6 +10,7 @@ enum EDirection {
 
 /**
  * @prop {number} activePage Current page.
+ * @prop {string} [className].
  * @prop {number} totalPageRange Total pages.
  * @prop {number} pageRangeDisplayed Count of displaying pages.
  * @prop {Function} onChange The handler of changing position.
@@ -18,6 +19,7 @@ enum EDirection {
  */
 interface IProps {
     activePage: number;
+    className: string;
     totalPageRange: number;
     pageRangeDisplayed: number;
     onChange: (page: number) => void;
@@ -170,7 +172,7 @@ export default class extends React.Component<IProps, {}> {
 
     render () {
         return (
-            <ul className="pagination">
+            <ul className={this.props.className || 'pagination'}>
                 {this.renderRowToFirst()}
                 {this.renderRowBackOneStep()}
                 {this.renderNumbers()}

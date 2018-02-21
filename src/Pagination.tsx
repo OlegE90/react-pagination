@@ -3,7 +3,7 @@ import 'assets/styles/main.less';
 import * as React from 'react';
 
 /**
- * Direction.
+ * Row direction.
  */
 export enum EDirection {
     RIGHT = 'RIGHT',

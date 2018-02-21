@@ -10,6 +10,7 @@ export declare enum EDirection {
 }
 /**
  * @prop {number} activePage Current page.
+ * @prop {string} [className].
  * @prop {number} totalPageRange Total pages.
  * @prop {number} pageRangeDisplayed Count of displaying pages.
  * @prop {Function} onChange The handler of changing position.
@@ -18,6 +19,7 @@ export declare enum EDirection {
  */
 export interface IProps {
     activePage: number;
+    className: string;
     totalPageRange: number;
     pageRangeDisplayed: number;
     onChange: (page: number) => void;

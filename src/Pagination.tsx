@@ -21,7 +21,7 @@ export enum EDirection {
  */
 export interface IProps {
     activePage: number;
-    className: string;
+    className?: string;
     totalPageRange: number;
     pageRangeDisplayed: number;
     onChange: (page: number) => void;

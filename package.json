@@ -4,12 +4,6 @@
   "description": "Simple pagination for react",
   "main": "./dist/Pagination.js",
   "types": "./dist/pagination.d.ts",
-  "browserslist": [
-    ">1%",
-    "last 4 versions",
-    "Firefox ESR",
-    "not ie < 9"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/OlegE90/react-pagination"
@@ -39,7 +33,6 @@
     "html-webpack-plugin": "^2.30.1",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
-    "postcss-loader": "^2.0.10",
     "style-loader": "^0.19.1",
     "ts-loader": "^3.2.0",
     "typescript": "^2.6.2",

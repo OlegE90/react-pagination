@@ -51,20 +51,9 @@ module.exports = (env) => ({
                     fallback: 'style-loader',
                     use: [
                         {
-                            loader: 'postcss-loader',
-                            options: {
-                                config: {
-                                    path: './tools/postcss.config.js',
-                                },
-                            },
-                        },
-                        {
-                            test: /\.css$/,
-                            include: path.resolve('src'),
                             loader: 'css-loader'
                         },
                         {
-                            test: /\.less$/,
                             loader: 'less-loader',
                         }
                     ]
@@ -73,8 +62,8 @@ module.exports = (env) => ({
             }]
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({ minimize: true }),
         ...(env.prod ? [
+            new webpack.optimize.UglifyJsPlugin({ minimize: true }),
             new ExtractTextPlugin("Pagination.css")
         ] : [
             new ExtractTextPlugin('[name].css'),

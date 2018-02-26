@@ -2,7 +2,7 @@
 import 'assets/styles/main.less';
 import * as React from 'react';
 /**
- * Direction.
+ * Row direction.
  */
 export declare enum EDirection {
     RIGHT = "RIGHT",
@@ -19,7 +19,7 @@ export declare enum EDirection {
  */
 export interface IProps {
     activePage: number;
-    className: string;
+    className?: string;
     totalPageRange: number;
     pageRangeDisplayed: number;
     onChange: (page: number) => void;

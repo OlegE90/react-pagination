@@ -2,7 +2,7 @@
 import 'assets/styles/main.less';
 import * as React from 'react';
 /**
- * Row direction.
+ * Arrow direction.
  */
 export declare enum EDirection {
     RIGHT = "RIGHT",
@@ -14,9 +14,9 @@ export declare enum EDirection {
  * @prop {number} totalPageRange Total pages.
  * @prop {number} pageRangeDisplayed Count of displaying pages.
  * @prop {Function} onChange The handler of changing position.
- * @prop {Function} [renderRowOneStep] Render custom row for one step (Right && Left).
- * @prop {Function} [renderRowLast] Render custom row to last page (Right && Left).
- * @prop {boolean} [hideRow] Hide not available row.
+ * @prop {Function} [renderArrowOneStep] Render custom row for one step (Right && Left).
+ * @prop {Function} [renderArrowLast] Render custom row to last page (Right && Left).
+ * @prop {boolean} [hideArrows] Hide not available row.
  */
 export interface IProps {
     activePage: number;
@@ -24,17 +24,17 @@ export interface IProps {
     totalPageRange: number;
     pageRangeDisplayed: number;
     onChange: (page: number) => void;
-    renderRowOneStep?: (row: EDirection) => JSX.Element;
-    renderRowLast?: (row: EDirection) => JSX.Element;
-    hideRow?: boolean;
+    renderArrowOneStep?: (row: EDirection) => JSX.Element;
+    renderArrowLast?: (row: EDirection) => JSX.Element;
+    hideArrows?: boolean;
 }
 export default class  extends React.Component<IProps, {}> {
     isAvailableNumber: (number: number) => boolean;
     handlerChangePage: (number: number) => (e: any) => void;
     renderNumbers(): JSX.Element;
-    renderRowBackOneStep: () => JSX.Element;
-    renderRowNextOneStep: () => JSX.Element;
-    renderRowToFirst: () => JSX.Element;
-    renderRowToLast: () => JSX.Element;
+    renderArrowBackOneStep: () => JSX.Element;
+    renderArrowNextOneStep: () => JSX.Element;
+    renderArrowToFirst: () => JSX.Element;
+    renderArrowToLast: () => JSX.Element;
     render(): JSX.Element;
 }

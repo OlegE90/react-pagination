@@ -2,10 +2,10 @@ import 'assets/styles/main.less';
 
 import * as React from 'react';
 
-import Row from './Row';
+import Arrow from './Arrow';
 
 /**
- * Row direction.
+ * Arrow direction.
  */
 export enum EDirection {
     RIGHT = 'RIGHT',
@@ -18,9 +18,9 @@ export enum EDirection {
  * @prop {number} totalPageRange Total pages.
  * @prop {number} pageRangeDisplayed Count of displaying pages.
  * @prop {Function} onChange The handler of changing position.
- * @prop {Function} [renderRowOneStep] Render custom row for one step (Right && Left).
- * @prop {Function} [renderRowLast] Render custom row to last page (Right && Left).
- * @prop {boolean} [hideRow] Hide not available row.
+ * @prop {Function} [renderArrowOneStep] Render custom row for one step (Right && Left).
+ * @prop {Function} [renderArrowLast] Render custom row to last page (Right && Left).
+ * @prop {boolean} [hideArrows] Hide not available row.
  */
 export interface IProps {
     activePage: number;
@@ -28,9 +28,9 @@ export interface IProps {
     totalPageRange: number;
     pageRangeDisplayed: number;
     onChange: (page: number) => void;
-    renderRowOneStep?: (row: EDirection) => JSX.Element;
-    renderRowLast?: (row: EDirection) => JSX.Element;
-    hideRow?: boolean;
+    renderArrowOneStep?: (row: EDirection) => JSX.Element;
+    renderArrowLast?: (row: EDirection) => JSX.Element;
+    hideArrows?: boolean;
 }
 
 export default class extends React.Component<IProps, {}> {
@@ -101,76 +101,76 @@ export default class extends React.Component<IProps, {}> {
         </React.Fragment>
     }
 
-    renderRowBackOneStep = (): JSX.Element => {
-        const {activePage, hideRow, renderRowOneStep} = this.props;
+    renderArrowBackOneStep = (): JSX.Element => {
+        const {activePage, hideArrows, renderArrowOneStep} = this.props;
         const backStep = activePage - 1;
         const isAvailable = this.isAvailableNumber(backStep);
 
-        return hideRow && !isAvailable ? null : (
-            <Row
+        return hideArrows && !isAvailable ? null : (
+            <Arrow
                 onClick={this.handlerChangePage(backStep)}
                 className="row_step-back"
                 disable={!isAvailable}
             >
-                {renderRowOneStep && renderRowOneStep(EDirection.LEFT) || <span>{'<'}</span>}
-            </Row>
+                {renderArrowOneStep && renderArrowOneStep(EDirection.LEFT) || <span>{'<'}</span>}
+            </Arrow>
         );
     };
 
-    renderRowNextOneStep = (): JSX.Element => {
-        const {activePage, hideRow, renderRowOneStep} = this.props;
+    renderArrowNextOneStep = (): JSX.Element => {
+        const {activePage, hideArrows, renderArrowOneStep} = this.props;
         const nextStep = activePage + 1;
         const isAvailable = this.isAvailableNumber(nextStep);
 
-        return hideRow && !isAvailable ? null : (
-            <Row
+        return hideArrows && !isAvailable ? null : (
+            <Arrow
                 onClick={this.handlerChangePage(nextStep)}
                 className="row_step-next"
                 disable={!isAvailable}
             >
-                {renderRowOneStep && renderRowOneStep(EDirection.RIGHT) || <span>{'>'}</span>}
-            </Row>
+                {renderArrowOneStep && renderArrowOneStep(EDirection.RIGHT) || <span>{'>'}</span>}
+            </Arrow>
         );
     };
 
-    renderRowToFirst = (): JSX.Element => {
-        const {activePage, hideRow, renderRowLast} = this.props;
+    renderArrowToFirst = (): JSX.Element => {
+        const {activePage, hideArrows, renderArrowLast} = this.props;
         const isAvailable = this.isAvailableNumber(activePage - 1);
 
-        return hideRow && !isAvailable ? null : (
-            <Row
+        return hideArrows && !isAvailable ? null : (
+            <Arrow
                 onClick={this.handlerChangePage(1)}
                 disable={!isAvailable}
                 className="row_first"
             >
-                {renderRowLast && renderRowLast(EDirection.LEFT) || <span>{'<<'}</span>}
-            </Row>
+                {renderArrowLast && renderArrowLast(EDirection.LEFT) || <span>{'<<'}</span>}
+            </Arrow>
         );
     };
 
-    renderRowToLast = (): JSX.Element => {
-        const {activePage, hideRow, totalPageRange, renderRowLast} = this.props;
+    renderArrowToLast = (): JSX.Element => {
+        const {activePage, hideArrows, totalPageRange, renderArrowLast} = this.props;
         const isAvailable = this.isAvailableNumber(activePage + 1);
 
-        return hideRow && !isAvailable ? null : (
-            <Row
+        return hideArrows && !isAvailable ? null : (
+            <Arrow
                 onClick={this.handlerChangePage(totalPageRange)}
                 disable={!isAvailable}
                 className="row_last"
             >
-                {renderRowLast && renderRowLast(EDirection.RIGHT) || <span>{'>>'}</span>}
-            </Row>
+                {renderArrowLast && renderArrowLast(EDirection.RIGHT) || <span>{'>>'}</span>}
+            </Arrow>
         );
     };
 
     render () {
         return (
             <ul className={this.props.className || 'pagination'}>
-                {this.renderRowToFirst()}
-                {this.renderRowBackOneStep()}
+                {this.renderArrowToFirst()}
+                {this.renderArrowBackOneStep()}
                 {this.renderNumbers()}
-                {this.renderRowNextOneStep()}
-                {this.renderRowToLast()}
+                {this.renderArrowNextOneStep()}
+                {this.renderArrowToLast()}
             </ul>
         );
     }

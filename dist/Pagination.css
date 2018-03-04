@@ -23,7 +23,7 @@
   background-color: blue;
   border-color: blue;
 }
-.pagination .page-item.row_disable span {
+.pagination .page-item.arrow_disable span {
   padding: 8px 12px;
   color: #bcbcbc;
   display: block;

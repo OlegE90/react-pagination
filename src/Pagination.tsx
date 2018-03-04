@@ -109,7 +109,7 @@ export default class extends React.Component<IProps, {}> {
         return hideArrows && !isAvailable ? null : (
             <Arrow
                 onClick={this.handlerChangePage(backStep)}
-                className="row_step-back"
+                className="arrow_step-back"
                 disable={!isAvailable}
             >
                 {renderArrowOneStep && renderArrowOneStep(EDirection.LEFT) || <span>{'<'}</span>}
@@ -125,7 +125,7 @@ export default class extends React.Component<IProps, {}> {
         return hideArrows && !isAvailable ? null : (
             <Arrow
                 onClick={this.handlerChangePage(nextStep)}
-                className="row_step-next"
+                className="arrow_step-next"
                 disable={!isAvailable}
             >
                 {renderArrowOneStep && renderArrowOneStep(EDirection.RIGHT) || <span>{'>'}</span>}
@@ -141,7 +141,7 @@ export default class extends React.Component<IProps, {}> {
             <Arrow
                 onClick={this.handlerChangePage(1)}
                 disable={!isAvailable}
-                className="row_first"
+                className="arrow_first"
             >
                 {renderArrowLast && renderArrowLast(EDirection.LEFT) || <span>{'<<'}</span>}
             </Arrow>
@@ -156,7 +156,7 @@ export default class extends React.Component<IProps, {}> {
             <Arrow
                 onClick={this.handlerChangePage(totalPageRange)}
                 disable={!isAvailable}
-                className="row_last"
+                className="arrow_last"
             >
                 {renderArrowLast && renderArrowLast(EDirection.RIGHT) || <span>{'>>'}</span>}
             </Arrow>

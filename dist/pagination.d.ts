@@ -14,8 +14,9 @@ export declare enum EDirection {
  * @prop {number} totalPageRange Total pages.
  * @prop {number} pageRangeDisplayed Count of displaying pages.
  * @prop {Function} onChange The handler of changing position.
- * @prop {Function} [renderRowOneStep] Render row for one step (Right && Left).
- * @prop {Function} [renderRowLast] Render row to last page (Right && Left).
+ * @prop {Function} [renderRowOneStep] Render custom row for one step (Right && Left).
+ * @prop {Function} [renderRowLast] Render custom row to last page (Right && Left).
+ * @prop {boolean} [hideRow] Hide not available row.
  */
 export interface IProps {
     activePage: number;
@@ -25,6 +26,7 @@ export interface IProps {
     onChange: (page: number) => void;
     renderRowOneStep?: (row: EDirection) => JSX.Element;
     renderRowLast?: (row: EDirection) => JSX.Element;
+    hideRow?: boolean;
 }
 export default class  extends React.Component<IProps, {}> {
     isAvailableNumber: (number: number) => boolean;

@@ -4,27 +4,37 @@
     padding-left: 0;
     list-style: none;
 
-    li {
-        display: list-item;
-    }
+    .page-item {
+        @border: 1px solid #bcbcbc;
 
-    .page-item.active .page-link {
-        z-index: 2;
-        color: white;
-        background-color: blue;
-        border-color: blue;
-    }
-
-    .page-link {
-        position: relative;
-        cursor: pointer;
         display: block;
-        margin-left: -1px;
-        line-height: 1.25;
-        color: blue;
-        background-color: white;
-        border: 1px solid green;
-        padding: 8px 12px;
+        border: @border;
+        border-right: 0;
+
+
+        &:last-child {
+            border-right: @border;
+        }
+
+        .page-link {
+            padding: 8px 12px;
+            cursor: pointer;
+            display: block;
+            color: blue;
+        }
+
+        &.active .page-link {
+            color: white;
+            background-color: blue;
+            border-color: blue;
+        }
+
+        &.row_disable span{
+            padding: 8px 12px;
+            color: #bcbcbc;
+            display: block;
+        }
+
     }
 
 }

@@ -73,5 +73,9 @@ module.exports = (env) => ({
                 inject: 'body'
             })
         ])
-    ]
+    ],
+    devServer: {
+        host: 'localhost',
+        port: process.env.npm_package_config_port || 8090,
+    }
 });

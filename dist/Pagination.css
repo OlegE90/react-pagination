@@ -4,25 +4,29 @@
   padding-left: 0;
   list-style: none;
 }
-.pagination li {
-  display: list-item;
+.pagination .page-item {
+  display: block;
+  border: 1px solid #bcbcbc;
+  border-right: 0;
+}
+.pagination .page-item:last-child {
+  border-right: 1px solid #bcbcbc;
+}
+.pagination .page-item .page-link {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: block;
+  color: blue;
 }
 .pagination .page-item.active .page-link {
-  z-index: 2;
   color: white;
   background-color: blue;
   border-color: blue;
 }
-.pagination .page-link {
-  position: relative;
-  cursor: pointer;
-  display: block;
-  margin-left: -1px;
-  line-height: 1.25;
-  color: blue;
-  background-color: white;
-  border: 1px solid green;
+.pagination .page-item.row_disable span {
   padding: 8px 12px;
+  color: #bcbcbc;
+  display: block;
 }
 
 /*# sourceMappingURL=Pagination.css.map*/

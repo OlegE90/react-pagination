@@ -18,9 +18,9 @@ export enum EDirection {
  * @prop {number} totalPageRange Total pages.
  * @prop {number} pageRangeDisplayed Count of displaying pages.
  * @prop {Function} onChange The handler of changing position.
- * @prop {Function} [renderArrowOneStep] Render custom row for one step (Right && Left).
- * @prop {Function} [renderArrowLast] Render custom row to last page (Right && Left).
- * @prop {boolean} [hideArrows] Hide not available row.
+ * @prop {Function} [renderArrowOneStep] Render custom arrow for one step (Right && Left).
+ * @prop {Function} [renderArrowLast] Render custom arrow to last page (Right && Left).
+ * @prop {boolean} [hideArrows] Hide not available arrows.
  */
 export interface IProps {
     activePage: number;

@@ -1,7 +1,7 @@
 /// <reference types="react" />
 /**
  * @prop {string} [className].
- * @prop {boolean} [isDisable] does row disable?
+ * @prop {boolean} [isDisable] does arrow disable?
  * @prop {JSX.Element} children Element.
  * @prop {Function} onClick Click on <a>.
  */

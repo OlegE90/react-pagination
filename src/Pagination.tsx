@@ -28,8 +28,8 @@ export interface IProps {
     totalPageRange: number;
     pageRangeDisplayed: number;
     onChange: (page: number) => void;
-    renderArrowOneStep?: (row: EDirection) => JSX.Element;
-    renderArrowLast?: (row: EDirection) => JSX.Element;
+    renderArrowOneStep?: (direction: EDirection) => JSX.Element;
+    renderArrowLast?: (direction: EDirection) => JSX.Element;
     hideArrows?: boolean;
 }
 

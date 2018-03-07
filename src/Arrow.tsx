@@ -19,9 +19,11 @@ export default function (props: IProps) {
 
     return disable ? (
         <li
-            className={`${className} row_disable page-item`}
+            className={`${className} arrow_disable page-item`}
         >
-            {children}
+            <div>
+                {children}
+            </div>
         </li>
     ) : (
         <li

@@ -1,16 +1,16 @@
+@color-blue: #336699;
+@color-blue-light: #4A8ED2;
+@color-blue-lighter: #EAEFF4;
+@color-gray: #E5E5E5;
+@border: 1px solid @color-gray;
+
 .pagination {
-    display: flex;
-    justify-content: center;
-    padding-left: 0;
     list-style: none;
 
     .page-item {
-        @border: 1px solid #bcbcbc;
-
-        display: block;
+        display: inline-block;
         border: @border;
         border-right: 0;
-
 
         &:last-child {
             border-right: @border;
@@ -20,21 +20,19 @@
             padding: 8px 12px;
             cursor: pointer;
             display: block;
-            color: blue;
+            color: @color-blue-light;
         }
 
         &.active .page-link {
             color: white;
-            background-color: blue;
-            border-color: blue;
+            background-color: @color-blue;
+            border-color: @color-blue-light;
         }
 
-        &.arrow_disable span{
-            padding: 8px 12px;
-            color: #bcbcbc;
+        &.arrow_disable div {
             display: block;
+            padding: 8px 12px;
+            color: @color-gray;
         }
-
     }
-
 }

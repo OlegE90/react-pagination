@@ -26,7 +26,6 @@ export class PaginationTest extends React.Component<{}, {}> {
                 totalPageRange={totalPageRange}
                 pageRangeDisplayed={pageRangeDisplayed}
                 onChange={this.handleOnChange}
-                hideArrows
             />
         );
     }

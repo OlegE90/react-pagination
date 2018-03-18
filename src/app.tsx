@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 
 import Pagination from './pagination'
 
-export class PaginationTest extends React.Component<{}, {}> {
+export class PaginationApp extends React.Component<{}, {}> {
 
     state = {
         activePage: 1,
@@ -32,6 +32,6 @@ export class PaginationTest extends React.Component<{}, {}> {
 }
 
 ReactDOM.render(
-    <PaginationTest />,
+    <PaginationApp />,
     document.getElementById('root')
 );

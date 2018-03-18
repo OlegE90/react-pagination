@@ -7,7 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = (env) => ({
     target: 'web',
     context: path.resolve('src'),
-    entry: env.prod ? './pagination.tsx' : './test.tsx',
+    entry: env.prod ? './pagination.tsx' : './app.tsx',
     output: {
         path: path.resolve('dist'),
         libraryTarget: 'umd',

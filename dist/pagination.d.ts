@@ -27,14 +27,16 @@ export interface IProps {
     renderArrowOneStep?: (direction: EDirection) => JSX.Element;
     renderArrowLast?: (direction: EDirection) => JSX.Element;
     hideArrows?: boolean;
+    children?: Function;
 }
 export default class  extends React.Component<IProps, {}> {
     isAvailableNumber: (number: number) => boolean;
     handlerChangePage: (number: number) => (e: any) => void;
-    getNumbers(): number[];
     renderArrowBackOneStep: () => JSX.Element;
-    renderArrowNextOneStep: () => JSX.Element;
     renderArrowToFirst: () => JSX.Element;
+    renderArrowNextOneStep: () => JSX.Element;
     renderArrowToLast: () => JSX.Element;
-    render(): JSX.Element;
+    renderCustomVersion: () => any;
+    renderDefault: () => JSX.Element;
+    render(): any;
 }

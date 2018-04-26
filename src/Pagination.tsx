@@ -3,6 +3,7 @@ import 'assets/styles/main.less';
 import * as React from 'react';
 
 import Arrow from './Arrow';
+import { getNumber } from './utils';
 
 /**
  * Arrow direction.
@@ -31,6 +32,7 @@ export interface IProps {
     renderArrowOneStep?: (direction: EDirection) => JSX.Element;
     renderArrowLast?: (direction: EDirection) => JSX.Element;
     hideArrows?: boolean;
+    children?: Function;
 }
 
 export default class extends React.Component<IProps, {}> {
@@ -40,55 +42,6 @@ export default class extends React.Component<IProps, {}> {
     handlerChangePage = (number: number) => (e: any) => {
         this.props.onChange(number);
     };
-
-    getNumbers (): number[] {
-        const {activePage, pageRangeDisplayed, totalPageRange} = this.props;
-        const part = Math.min(totalPageRange, pageRangeDisplayed);
-
-        if (part < 2) {
-            return;
-        }
-
-        let countNumbersLeft = Math.ceil((part - 1) / 2);
-        let countNumbersRight = Math.floor((part - 1) / 2);
-        let leftNumbers = [];
-        let rightNumbers = [];
-        let i = 0;
-        let k = 0;
-
-        while (countNumbersLeft > 0 || countNumbersRight > 0) {
-            i++;
-            k++;
-
-            if (countNumbersLeft) {
-                let number = activePage - i;
-                if (this.isAvailableNumber(number)) {
-                    leftNumbers.push(number);
-                    --countNumbersLeft;
-                } else {
-                    countNumbersRight += countNumbersLeft;
-                    countNumbersLeft = 0;
-                }
-            }
-
-            if (countNumbersRight) {
-                let number = activePage + k;
-                if (this.isAvailableNumber(number)) {
-                    rightNumbers.push(number);
-                    --countNumbersRight;
-                } else {
-                    countNumbersLeft += countNumbersRight;
-                    countNumbersRight = 0;
-                }
-            }
-        }
-
-        return [
-            ...leftNumbers.reverse(),
-            activePage,
-            ...rightNumbers,
-        ];
-    }
 
     renderArrowBackOneStep = (): JSX.Element => {
         const {activePage, hideArrows, renderArrowOneStep} = this.props;
@@ -102,6 +55,21 @@ export default class extends React.Component<IProps, {}> {
                 disable={!isAvailable}
             >
                 {renderArrowOneStep && renderArrowOneStep(EDirection.LEFT) || <span>{'<'}</span>}
+            </Arrow>
+        );
+    };
+
+    renderArrowToFirst = (): JSX.Element => {
+        const {activePage, hideArrows, renderArrowLast} = this.props;
+        const isAvailable = this.isAvailableNumber(activePage - 1);
+
+        return hideArrows && !isAvailable ? null : (
+            <Arrow
+                onClick={this.handlerChangePage(1)}
+                disable={!isAvailable}
+                className="arrow_first"
+            >
+                {renderArrowLast && renderArrowLast(EDirection.LEFT) || <span>{'<<'}</span>}
             </Arrow>
         );
     };
@@ -122,21 +90,6 @@ export default class extends React.Component<IProps, {}> {
         );
     };
 
-    renderArrowToFirst = (): JSX.Element => {
-        const {activePage, hideArrows, renderArrowLast} = this.props;
-        const isAvailable = this.isAvailableNumber(activePage - 1);
-
-        return hideArrows && !isAvailable ? null : (
-            <Arrow
-                onClick={this.handlerChangePage(1)}
-                disable={!isAvailable}
-                className="arrow_first"
-            >
-                {renderArrowLast && renderArrowLast(EDirection.LEFT) || <span>{'<<'}</span>}
-            </Arrow>
-        );
-    };
-
     renderArrowToLast = (): JSX.Element => {
         const {activePage, hideArrows, totalPageRange, renderArrowLast} = this.props;
         const isAvailable = this.isAvailableNumber(activePage + 1);
@@ -152,14 +105,32 @@ export default class extends React.Component<IProps, {}> {
         );
     };
 
-    render () {
-        const { activePage } = this.props;
+    renderCustomVersion = () => {
+        const { activePage, pageRangeDisplayed, totalPageRange, children } = this.props;
+
+        if (children === "function") {
+            const arrow = ['oneStep', 'last'];
+
+            return children({
+                number: getNumber(activePage, pageRangeDisplayed, totalPageRange),
+                rowRenderLeft: (callback) => {
+                    [true, false].map((isLast) => callback(EDirection.LEFT, isLast, this.isAvailableNumber(activePage - 1)));
+                },
+                rowRenderRight: (callback) => {
+                    [true, false].map((isLast) => callback(EDirection.RIGHT, isLast, this.isAvailableNumber(activePage + 1)));
+                }
+            });
+        }
+    };
+
+    renderDefault = () => {
+        const { activePage, pageRangeDisplayed, totalPageRange } = this.props;
 
         return (
             <ul className={this.props.className || 'pagination'}>
                 {this.renderArrowToFirst()}
                 {this.renderArrowBackOneStep()}
-                {this.getNumbers().map((value) => (
+                {getNumber(activePage, pageRangeDisplayed, totalPageRange).map((value) => (
                     <li key={value} onClick={this.handlerChangePage(value)}
                         className={`page-item ${value === activePage ? 'active' : ''}`}>
                         <a className="page-link">{value}</a>
@@ -169,5 +140,9 @@ export default class extends React.Component<IProps, {}> {
                 {this.renderArrowToLast()}
             </ul>
         );
+    };
+
+    render() {
+        return typeof this.props.children === "function" ? this.renderCustomVersion() : this.renderDefault()
     }
 }

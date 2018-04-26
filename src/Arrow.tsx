@@ -18,21 +18,14 @@ export default function (props: IProps) {
     const {onClick, disable, className, children} = props;
 
     return disable ? (
-        <li
-            className={`${className} arrow_disable page-item`}
-        >
+        <li className={`${className} arrow_disable page-item`}>
             <div>
                 {children}
             </div>
         </li>
     ) : (
-        <li
-            className={`${className} page-item`}
-        >
-            <a
-                onClick={onClick}
-                className="page-link"
-            >
+        <li className={`${className} page-item`}>
+            <a onClick={onClick} className="page-link">
                 {children}
             </a>
         </li>

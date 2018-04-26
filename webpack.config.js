@@ -15,8 +15,7 @@ module.exports = (env) => ({
   },
   externals: {
     'react': 'React',
-    'react-dom': 'ReactDOM',
-    'react-router': 'ReactRouter'
+    'react-dom': 'ReactDOM'
   },
   devtool: env.prod ? 'source-map' : 'eval',
   resolve: {

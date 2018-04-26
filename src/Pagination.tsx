@@ -159,14 +159,12 @@ export default class extends React.Component<IProps, {}> {
             <ul className={this.props.className || 'pagination'}>
                 {this.renderArrowToFirst()}
                 {this.renderArrowBackOneStep()}
-                {this.getNumbers().map((value) => {
-                    return (
-                        <li key={value} onClick={this.handlerChangePage(value)}
-                            className={`page-item ${value === activePage ? 'active' : ''}`}>
-                            <a className="page-link">{value}</a>
-                        </li>
-                    )
-                })}
+                {this.getNumbers().map((value) => (
+                    <li key={value} onClick={this.handlerChangePage(value)}
+                        className={`page-item ${value === activePage ? 'active' : ''}`}>
+                        <a className="page-link">{value}</a>
+                    </li>
+                ))}
                 {this.renderArrowNextOneStep()}
                 {this.renderArrowToLast()}
             </ul>

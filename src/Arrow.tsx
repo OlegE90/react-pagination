@@ -13,7 +13,6 @@ export interface IProps {
     onClick: (e: any) => void;
 }
 
-
 export default function (props: IProps) {
     const {onClick, disable, className, children} = props;
 

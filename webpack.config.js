@@ -13,10 +13,6 @@ module.exports = (env) => ({
     libraryTarget: 'umd',
     filename: env.prod ? 'Pagination.js' : 'bundle.js',
   },
-  externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM'
-  },
   devtool: env.prod ? 'source-map' : 'eval',
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
@@ -64,6 +60,17 @@ module.exports = (env) => ({
 
         })
       }]
+  },
+  externals: {
+    ...(env.prod ? {
+      react: {
+        root: 'React',
+        commonjs2: 'react',
+        commonjs: 'react',
+        amd: 'react',
+        umd: 'react',
+      }
+    } : {})
   },
   plugins: [
     ...(env.prod ? [

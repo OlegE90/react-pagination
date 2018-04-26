@@ -41,7 +41,7 @@ export default class extends React.Component<IProps, {}> {
         this.props.onChange(number);
     };
 
-    renderNumbers (): JSX.Element {
+    getNumbers (): number[] {
         const {activePage, pageRangeDisplayed, totalPageRange} = this.props;
         const part = Math.min(totalPageRange, pageRangeDisplayed);
 
@@ -83,22 +83,11 @@ export default class extends React.Component<IProps, {}> {
             }
         }
 
-        const numbers: number[] = [
+        return [
             ...leftNumbers.reverse(),
             activePage,
             ...rightNumbers,
         ];
-
-        return <React.Fragment>
-            {numbers.map((value) => {
-                return (
-                    <li key={value} onClick={this.handlerChangePage(value)}
-                        className={`page-item ${value === activePage ? 'active' : ''}`}>
-                        <a className="page-link">{value}</a>
-                    </li>
-                )
-            })}
-        </React.Fragment>
     }
 
     renderArrowBackOneStep = (): JSX.Element => {
@@ -164,11 +153,20 @@ export default class extends React.Component<IProps, {}> {
     };
 
     render () {
+        const { activePage } = this.props;
+
         return (
             <ul className={this.props.className || 'pagination'}>
                 {this.renderArrowToFirst()}
                 {this.renderArrowBackOneStep()}
-                {this.renderNumbers()}
+                {this.getNumbers().map((value) => {
+                    return (
+                        <li key={value} onClick={this.handlerChangePage(value)}
+                            className={`page-item ${value === activePage ? 'active' : ''}`}>
+                            <a className="page-link">{value}</a>
+                        </li>
+                    )
+                })}
                 {this.renderArrowNextOneStep()}
                 {this.renderArrowToLast()}
             </ul>

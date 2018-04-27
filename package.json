@@ -1,6 +1,6 @@
 {
   "name": "react-pagination-main",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Simple pagination for react",
   "main": "./dist/Pagination.js",
   "types": "./dist/pagination.d.ts",

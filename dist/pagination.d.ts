@@ -1,6 +1,7 @@
 /// <reference types="react" />
 import 'assets/styles/main.less';
 import * as React from 'react';
+import { ICustomUIChildrenResult } from './models';
 /**
  * Arrow direction.
  */
@@ -27,7 +28,7 @@ export interface IProps {
     renderArrowOneStep?: (direction: EDirection) => JSX.Element;
     renderArrowLast?: (direction: EDirection) => JSX.Element;
     hideArrows?: boolean;
-    children?: (params: any) => JSX.Element;
+    children?: (params: ICustomUIChildrenResult) => JSX.Element;
 }
 export default class  extends React.Component<IProps, {}> {
     isAvailableNumber: (number: number) => boolean;

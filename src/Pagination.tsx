@@ -3,6 +3,7 @@ import 'assets/styles/main.less';
 import * as React from 'react';
 
 import Arrow from './Arrow';
+import { ICustomUIChildrenResult } from './models';
 
 /**
  * Arrow direction.
@@ -31,7 +32,7 @@ export interface IProps {
     renderArrowOneStep?: (direction: EDirection) => JSX.Element;
     renderArrowLast?: (direction: EDirection) => JSX.Element;
     hideArrows?: boolean;
-    children?: (params: any) => JSX.Element;
+    children?: (params: ICustomUIChildrenResult) => JSX.Element;
 }
 
 export default class extends React.Component<IProps, {}> {
@@ -156,28 +157,25 @@ export default class extends React.Component<IProps, {}> {
     renderCustomVersion = () => {
         const {activePage, children, totalPageRange} = this.props;
 
-        const isAvailableNumber = this.isAvailableNumber.bind(this);
-        console.log('isAvailableNumber', isAvailableNumber);
-
         return children({
+            rowRenderLeft: (callback) => [true, false].map((isLast) =>
+                callback({
+                    isLastArrow: isLast,
+                    isAvailable: this.isAvailableNumber(activePage - 1),
+                    handleChange: this.handlerChangePage(isLast ? 1 : activePage - 1)
+                })
+            ),
             numbers: this.getNumber().map((number) => ({
                 number,
                 isActive: activePage === number,
                 handleChange: this.handlerChangePage(number)
             })),
-            rowRenderLeft: (callback) => [true, false].map((isLast) =>
-                callback(
-                    isLast,
-                    isAvailableNumber(activePage - 1),
-                    this.handlerChangePage(isLast ? 1 : activePage - 1)
-                )
-            ),
             rowRenderRight: (callback) => [false, true].map((isLast) =>
-                callback(
-                    isLast,
-                    isAvailableNumber(activePage + 1),
-                    this.handlerChangePage(isLast ? totalPageRange : activePage + 1)
-                ))
+                callback({
+                    isLastArrow: isLast,
+                    isAvailable: this.isAvailableNumber(activePage + 1),
+                    handleChange: this.handlerChangePage(isLast ? totalPageRange : activePage + 1)
+                }))
         });
     };
 

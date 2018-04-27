@@ -48,7 +48,7 @@ export class PaginationApp extends React.Component {
       >
         {result => (
           <ul style={{ listStyle: "none" }}>
-            {result.rowRenderLeft((isLastArrow, isDisable, handleChange) => (
+            {result.rowRenderLeft(({isLastArrow, isAvailable, handleChange}) => isAvailable && (
               <li style={liStyle} onClick={handleChange}>
                 <span>{isLastArrow ? "<<" : "<"}</span>
               </li>
@@ -64,7 +64,7 @@ export class PaginationApp extends React.Component {
                 {number}
               </li>
             ))}
-            {result.rowRenderRight((isLastArrow, isDisable, handleChange) => (
+            {result.rowRenderRight(({isLastArrow, isAvailable, handleChange}) => isAvailable && (
               <li style={liStyle} onClick={handleChange}>
                 <span>{isLastArrow ? ">>" : ">"}</span>
               </li>

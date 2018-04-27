@@ -14,4 +14,4 @@ Information about available props you can find here - https://github.com/OlegE90
 
 ### How is it look like?
 
-https://codepen.io/OlegE/pen/mxVeMq
+https://codesandbox.io/s/9819x43mr

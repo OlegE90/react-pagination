@@ -158,7 +158,7 @@ export default class extends React.Component<IProps, {}> {
         const {activePage, children, totalPageRange} = this.props;
 
         return children({
-            rowRenderLeft: (callback) => [true, false].map((isLast) =>
+            renderArrowsLeft: (callback) => [true, false].map((isLast) =>
                 callback({
                     isLastArrow: isLast,
                     isAvailable: this.isAvailableNumber(activePage - 1),
@@ -170,7 +170,7 @@ export default class extends React.Component<IProps, {}> {
                 isActive: activePage === number,
                 handleChange: this.handlerChangePage(number)
             })),
-            rowRenderRight: (callback) => [false, true].map((isLast) =>
+            renderArrowsRight: (callback) => [false, true].map((isLast) =>
                 callback({
                     isLastArrow: isLast,
                     isAvailable: this.isAvailableNumber(activePage + 1),

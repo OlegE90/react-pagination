@@ -8,6 +8,7 @@
     "type": "git",
     "url": "https://github.com/OlegE90/react-pagination"
   },
+  "license": "MIT",
   "keywords": [
     "react",
     "reactjs",

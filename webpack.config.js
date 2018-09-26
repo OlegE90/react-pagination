@@ -39,7 +39,7 @@ module.exports = (_, argv) => {
   const isProduction = argv.mode === 'production';
 
   return {
-    entry: isProduction  ? './src/pagination.tsx' : './src/app.tsx',
+    entry: path.resolve(__dirname, isProduction  ? './src/pagination.tsx' : './src/app.tsx'),
     output: {
       path: path.resolve('dist'),
       libraryTarget: "umd",

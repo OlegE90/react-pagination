@@ -1,3 +1,5 @@
+https://travis-ci.org/OlegE90/react-pagination.svg?branch=master
+
 React pagination.
 ===============
 
@@ -9,8 +11,6 @@ Via NPM
 ```
 npm install --save react-pagination-main
 ```
-
-Information about available props you can find here - https://github.com/OlegE90/react-pagination/blob/master/dist/pagination.d.ts
 
 ### How is it look like?
 

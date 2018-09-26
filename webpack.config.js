@@ -1,8 +1,7 @@
 const path = require('path');
-const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCss = require('mini-css-extract-plugin');
 
 module.exports = (env) => ({
   target: 'web',
@@ -46,19 +45,16 @@ module.exports = (env) => ({
       },
       // Rules for Style Sheets
       {
-        test: /\.(css|less)$/,
-        rules: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader'
-            },
-            {
-              loader: 'less-loader',
-            }
-          ]
-
-        })
+        test: /\.(less)$/,
+        use: [
+          MiniCss.loader,
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'less-loader',
+          }
+        ]
       }]
   },
   externals: {
@@ -74,10 +70,9 @@ module.exports = (env) => ({
   },
   plugins: [
     ...(env.prod ? [
-      new webpack.optimize.UglifyJsPlugin({ minimize: true }),
-      new ExtractTextPlugin("Pagination.css")
+      new MiniCss("Pagination.css")
     ] : [
-      new ExtractTextPlugin('[name].css'),
+      new MiniCss('[name].css'),
       new HtmlWebpackPlugin({
         template: path.resolve('src/assets/index.html'),
         filename: 'index.html',

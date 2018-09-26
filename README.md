@@ -7,7 +7,7 @@ This is react pagination with TypeScript.
 
 Via NPM
 ```
-npm i --save react-pagination-main
+npm install react-pagination-main
 ```
 
 Information about available props you can find here - https://github.com/OlegE90/react-pagination/blob/master/dist/pagination.d.ts

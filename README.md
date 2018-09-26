@@ -1,4 +1,4 @@
-https://travis-ci.org/OlegE90/react-pagination.svg?branch=master
+[![Build Status](https://travis-ci.org/OlegE90/react-pagination.svg?branch=master)](https://travis-ci.org/OlegE90/react-pagination)
 
 React pagination.
 ===============

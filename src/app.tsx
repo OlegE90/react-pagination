@@ -17,8 +17,8 @@ export class PaginationApp extends React.Component<{}, {}> {
         })
     }
 
-    render () {
-        const {activePage, pageRangeDisplayed, totalPageRange} = this.state;
+    render() {
+        const { activePage, pageRangeDisplayed, totalPageRange } = this.state;
 
         return (
             <Pagination

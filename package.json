@@ -54,7 +54,6 @@
     "prebuild": "rimraf dist",
     "prepublish": "npm run build",
     "build": "webpack --mode production",
-    "docker": "webpack-dev-server --port 80 --env.dev --hot",
     "start": "webpack-dev-server --env.dev --hot"
   },
   "author": "OlegE"

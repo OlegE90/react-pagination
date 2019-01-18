@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import Pagination from './pagination'
+import Pagination from './Pagination'
 
 export class PaginationApp extends React.Component<{}, {}> {
 

@@ -54,7 +54,7 @@
     "prebuild": "rimraf dist",
     "prepublish": "npm run build",
     "build": "webpack --mode production",
-    "start-inside-docker": "webpack-dev-server --host 0.0.0.0 --port 80",
+    "start-inside-docker": "webpack-dev-server --host 0.0.0.0 --port 8090",
     "start": "webpack-dev-server --env.dev --hot"
   },
   "author": "OlegE"

@@ -112,7 +112,7 @@ module.exports = (_, argv) => {
       })
     ],
     devServer: {
-      host: '0.0.0.0',
+      host: 'localhost',
       port: process.env.npm_package_config_port || 8090,
     }
   }

@@ -12,10 +12,6 @@ Via NPM
 npm install --save react-pagination-main
 ```
 
-### How is it look like?
-
-https://codesandbox.io/s/9819x43mr
-
 ### For run react-pagination as a docker container
 
 ```
